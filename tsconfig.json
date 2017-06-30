@@ -5,12 +5,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": true,
+    "typeRoots": [
+      "./types/"
+    ],
     "lib": [
       "dom",
       "es2015"
-    ],
-    "typesRoots": [
-      "./src/types/"
     ],
     "module": "es2015",
     "moduleResolution": "node",
