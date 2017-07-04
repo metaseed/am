@@ -4,10 +4,13 @@ import { PopoverController } from 'ionic-angular';
 import { PopoverPage } from '../about-popover/about-popover';
 
 import { Http } from '@angular/http';
-import { GitHubStorage } from '../../storage/github';
+import { GitHubStorage, UserInfo } from '../../storage/github';
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html'
+  templateUrl: 'about.html',
+  providers: [
+    { provide: UserInfo, useValue: new UserInfo('metasong', 'mssong179', 'smetaseed@gmail.com') },
+  ]
 })
 export class AboutPage {
   conferenceDate = '2047-05-17';
@@ -17,9 +20,9 @@ export class AboutPage {
   }
 
   presentPopover(event: Event) {
-    this.storage.newRepos('test').subscribe((repo) => {
+    this.storage.repos('test').subscribe((repo) => {
       console.log(repo);
-      repo.newPost('test').sub
+      repo.post('test1', Date.now()).subscribe();
     }, (error) => console.log(error));
     let popover = this.popoverCtrl.create(PopoverPage);
     popover.present({ ev: event });

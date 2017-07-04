@@ -1,13 +1,17 @@
 import { IStorage } from '../storage';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { Const } from './Const';
+import { Const } from './const';
 import { UserInfo } from './user-info';
 import { Repository } from './repository';
+
+export * from './user-info';
 @Injectable()
 export class GitHubStorage {
     private _userInfo = new UserInfo('metasong', 'mssong179', 'metaseed@gmail.com');
@@ -16,9 +20,18 @@ export class GitHubStorage {
     }
 
     getRepos(name: string) {
-        return this._http.get(`${Const.baseUrl}/user/repos/${this._userInfo.name}/${name}`)
-            .map(value => {
+        return this._http.get(`${Const.baseUrl}/repos/${this._userInfo.name}/${name}`)
+            .map(resp => {
                 return new Repository(this._http, name, this._userInfo);
+            })
+            .catch(error => {
+                let err = error.json();
+                return Observable.throw(
+                    {
+                        id: err.status,
+                        message: `no such repository: ${name}, message:${err.message}`
+                    }
+                );
             });
     }
 
@@ -44,6 +57,17 @@ export class GitHubStorage {
         ).map(value => {
             return new Repository(this._http, name, this._userInfo);
         });
+    }
+
+    repos(name: string) {
+        return this.getRepos(name).catch((err) => {
+            if (err.id === 404) {
+                return this.newRepos(name);
+            }
+            else {
+                return Observable.throw(err);
+            }
+        })
     }
 
 }
