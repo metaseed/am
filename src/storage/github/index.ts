@@ -11,7 +11,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { Const } from './const';
 import { UserInfo } from './user-info';
 import { Repository } from './repository';
-
+export * from './repository';
 export * from './user-info';
 @Injectable()
 export class GitHubStorage {

@@ -65,7 +65,7 @@ export class Repository {
             });
     }
 
-    delPost(path: string, branch: string = '') {
+    delPost(path: string, branch: string = 'master') {
         return this.getSha(path, branch)
             .do(x => console.log(x), e => console.log(e))
             .flatMap(response => {
