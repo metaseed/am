@@ -28,7 +28,7 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-import { GitHubStorage } from '../storage/github';
+import { GitHubStorage, UserInfo } from '../storage/github';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,8 @@ import { GitHubStorage } from '../storage/github';
     UserData,
     InAppBrowser,
     SplashScreen,
-    GitHubStorage
+    GitHubStorage,
+    { provide: UserInfo, useValue: new UserInfo('metasong', 'mssong179', 'smetaseed@gmail.com') }
   ]
 })
 export class AppModule { }

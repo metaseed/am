@@ -15,9 +15,8 @@ import { Repository } from './repository';
 export * from './user-info';
 @Injectable()
 export class GitHubStorage {
-    private _userInfo = new UserInfo('metasong', 'mssong179', 'metaseed@gmail.com');
 
-    constructor(private _http: Http) {
+    constructor(private _http: Http, private _userInfo: UserInfo) {
     }
 
     getRepos(name: string) {

@@ -7,10 +7,7 @@ import { Http } from '@angular/http';
 import { GitHubStorage, UserInfo } from '../../storage/github';
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html',
-  providers: [
-    { provide: UserInfo, useValue: new UserInfo('metasong', 'mssong179', 'smetaseed@gmail.com') },
-  ]
+  templateUrl: 'about.html'
 })
 export class AboutPage {
   conferenceDate = '2047-05-17';
