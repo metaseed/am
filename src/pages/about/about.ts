@@ -20,7 +20,7 @@ export class AboutPage {
   }
 
   presentPopover(event: Event) {
-    this.storage.repos('test').subscribe((repo) => {
+    this.storage.repos('test1').subscribe((repo) => {
       console.log(repo);
       repo.post('test00', 'abc' + Date.now()).subscribe();
     }, (error) => console.log(error));

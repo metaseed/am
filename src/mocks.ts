@@ -118,6 +118,7 @@ export class PlatformMock {
 
 /**
  * @class MenuMock
+ * 
  */
 export class MenuMock {
     public close(): any {
