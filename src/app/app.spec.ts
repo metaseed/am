@@ -2,6 +2,7 @@ import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { IonicModule } from 'ionic-angular';
 import { ConferenceApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { } from 'jasmine';
 
 let comp: ConferenceApp;
 let fixture: ComponentFixture<ConferenceApp>;

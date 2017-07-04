@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/observable/throw';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Const } from './const';
@@ -25,11 +26,10 @@ export class GitHubStorage {
                 return new Repository(this._http, name, this._userInfo);
             })
             .catch(error => {
-                let err = error.json();
                 return Observable.throw(
                     {
-                        id: err.status,
-                        message: `no such repository: ${name}, message:${err.message}`
+                        id: error.status,
+                        message: `no such repository: ${name}, message:${error.json().message}`
                     }
                 );
             });
@@ -40,7 +40,7 @@ export class GitHubStorage {
         headers.append("Authorization", "Basic " + btoa(this._userInfo.name + ":" + this._userInfo.password));
         headers.append("Content-Type", "application/x-www-form-urlencoded");
         return this._http.post(
-            Const.baseUrl + 'user/repos',
+            Const.baseUrl + '/user/repos',
             {
                 "name": name,
                 "description": "This is your first repository",
