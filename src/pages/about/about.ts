@@ -13,12 +13,14 @@ export class AboutPage {
   conferenceDate = '2047-05-17';
 
   constructor(public popoverCtrl: PopoverController, private _http: Http, private storage: GitHubStorage) {
-    this.storage.call().subscribe((resp) => {
-      console.log(resp);
-    }, (error) => console.log(error));
+
   }
 
   presentPopover(event: Event) {
+    this.storage.newRepos('test').subscribe((repo) => {
+      console.log(repo);
+      repo.newPost('test').sub
+    }, (error) => console.log(error));
     let popover = this.popoverCtrl.create(PopoverPage);
     popover.present({ ev: event });
   }
